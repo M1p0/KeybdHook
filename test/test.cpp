@@ -4,22 +4,28 @@ using namespace std;
 
 HHOOK keyboardHook = 0;
 
-//LRESULT CALLBACK HookCallback(int code, WPARAM wParam, LPARAM lParam)
-//{
-//    KBDLLHOOKSTRUCT *ks = (KBDLLHOOKSTRUCT*)lParam;
-//    if (ks->vkCode == 'A')
-//    {
-//        cout << "已拦截A键" << endl;
-//        return 1;
-//    }
-//    return CallNextHookEx(0, code, wParam, lParam);
-//}
-
-
 LRESULT CALLBACK HookCallback(int code, WPARAM wParam, LPARAM lParam)
 {
-    return 1;
+    KBDLLHOOKSTRUCT *ks = (KBDLLHOOKSTRUCT*)lParam;
+
+    if (ks->vkCode == 'G')
+    {
+        cout << "已拦截A键" << endl;
+        keybd_event(VK_CONTROL, 0, 0, 0);
+        keybd_event(VK_SPACE, 0, 0, 0);
+        keybd_event(VK_CONTROL, 0, KEYEVENTF_KEYUP, 0);
+        keybd_event(VK_SPACE, 0, KEYEVENTF_KEYUP, 0);
+        return 1;
+    }
+    return CallNextHookEx(0, code, wParam, lParam);
 }
+
+
+//LRESULT CALLBACK HookCallback(int code, WPARAM wParam, LPARAM lParam)
+//{
+//
+//    return 1;
+//}
 
 
 int main()
@@ -35,6 +41,7 @@ int main()
     {
         if (PeekMessageA(&msg, 0, 0, 0, PM_REMOVE))
         {
+
             TranslateMessage(&msg);
             DispatchMessageW(&msg);
         } 
@@ -42,8 +49,8 @@ int main()
             Sleep(1);    //避免CPU全负载运行
     }
     UnhookWindowsHookEx(keyboardHook);
-
     cout << "程序正常退出" << endl;
 
     return 0;
 }
+
