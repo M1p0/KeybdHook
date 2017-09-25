@@ -39,7 +39,7 @@ int main()
             DispatchMessageW(&msg);
         } 
         else
-            Sleep(0);    //避免CPU全负载运行
+            Sleep(1);    //避免CPU全负载运行
     }
     UnhookWindowsHookEx(keyboardHook);
 
