@@ -8,7 +8,7 @@ LRESULT CALLBACK HookCallback(int code, WPARAM wParam, LPARAM lParam)
 {
     KBDLLHOOKSTRUCT *ks = (KBDLLHOOKSTRUCT*)lParam;
 
-    if (ks->vkCode == 'G')    //G键超级跳 可自行修改
+    if (wParam == WM_KEYDOWN && ks->vkCode == 'G')    //G键超级跳 可自行修改
     {
         cout << "已拦截G键" << endl;
         keybd_event(67, 0, 0, 0);
