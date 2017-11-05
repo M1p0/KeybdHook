@@ -31,7 +31,7 @@ int main()
             DispatchMessageW(&msg);
         } 
         else
-            Sleep(1);    //避免CPU全负载运行
+            Sleep(1);   //避免CPU全负载运行
     }
     UnhookWindowsHookEx(keyboardHook);
     cout << "程序正常退出" << endl;
