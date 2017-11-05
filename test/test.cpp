@@ -8,9 +8,9 @@ LRESULT CALLBACK HookCallback(int code, WPARAM wParam, LPARAM lParam)
 {
     KBDLLHOOKSTRUCT *ks = (KBDLLHOOKSTRUCT*)lParam;
 
-    if (wParam == WM_KEYDOWN && ks->vkCode == 'G')    //Gé”®è¶…çº§è·³ å¯è‡ªè¡Œä¿®æ”¹
+    if (wParam == WM_KEYDOWN && ks->vkCode == 'G')   //G¼ü³¬¼¶Ìø ¿É×ÔÐÐÐÞ¸Ä
     {
-        cout << "å·²æ‹¦æˆªGé”®" << endl;
+        cout << "ÒÑÀ¹½ØG¼ü" << endl;
         keybd_event(67, 0, 0, 0);
         keybd_event(VK_SPACE, 0, 0, 0);
         keybd_event(67, 0, KEYEVENTF_KEYUP, 0);
@@ -32,10 +32,10 @@ int main()
 {
     keyboardHook = SetWindowsHookExA(WH_KEYBOARD_LL, HookCallback, GetModuleHandleA(0), 0);
 
-    cout << "ç¨‹åºæ­£å¸¸è¿è¡Œ" << endl;
-    cout << "å…³é—­ç¨‹åºä»¥æ¢å¤é”®ç›˜" << endl;
+    cout << "³ÌÐòÕý³£ÔËÐÐ" << endl;
+    cout << "¹Ø±Õ³ÌÐòÒÔ»Ö¸´¼üÅÌ" << endl;
 
-    //ä¸å¯æ¼æŽ‰æ¶ˆæ¯å¤„ç†ï¼Œä¸ç„¶ç¨‹åºä¼šå¡æ­»
+    //²»¿ÉÂ©µôÏûÏ¢´¦Àí£¬²»È»³ÌÐò»á¿¨ËÀ
     MSG msg;
     while (1)
     {
@@ -46,10 +46,10 @@ int main()
             DispatchMessageW(&msg);
         } 
         else
-            Sleep(1);    //é¿å…CPUå…¨è´Ÿè½½è¿è¡Œ
+            Sleep(1);    //é¿å…CPUå…¨è´Ÿè½½è¿è¡?
     }
     UnhookWindowsHookEx(keyboardHook);
-    cout << "ç¨‹åºæ­£å¸¸é€€å‡º" << endl;
+    cout << "³ÌÐòÕý³£ÍË³ö" << endl;
 
     return 0;
 }
